@@ -22,9 +22,12 @@ class ProjectsController extends Controller
     public function store()
     {
     	$attributes = request()->validate([
-    		'title' => 'required', 
-    		'description' => 'required'
+    		'title'       => 'required', 
+    		'description' => 'required',
+    		'owner_id'    => 'required'
     	]);
+
+    	// dd($attributes);
 
     	Project::create($attributes);
 
