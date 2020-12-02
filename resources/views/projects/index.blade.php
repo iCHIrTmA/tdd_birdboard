@@ -1,8 +1,8 @@
 @extends('layouts.app')
+
 @section('content')
-	<div style="display: flex; align-items: center;">
-		<h1 style="margin-right: auto;">Birdboard</h1>
-		<a href="{{ url('/projects/create') }}">New Project</a>
+	<div class="flex items">
+		<a href="{{ url('/projects/create') }}" class="mb: auto">New Project</a>
 	</div>
 
 	<ul>
