@@ -17,14 +17,14 @@
 </head>
 <body class="bg-gray-200 h-screen antialiased leading-none">
     <div id="app">
-        <nav class="bg-white shadow mb-8 py-6">
+        <nav class="bg-white shadow mb-8 py-3">
             <div class="container mx-auto px-6 md:px-0">
                 <div class="flex items-center justify-center ">
-                    <div class="mr-6">
-                        <a href="{{ url('/') }}" class="text-lg font-semibold text-black-100 no-underline">
-                            {{ config('app.name', 'Laravel') }}
+                    <h1 class="mr-6">
+                        <a href="{{ url('/') }}">
+                            <img src="{{ asset('images/logo.svg')}}" alt="birdboard">
                         </a>
-                    </div>
+                    </h1>
                     <div class="flex-1 text-right">
                         @guest
                             <a class="no-underline hover:underline text-black-100 text-sm p-3" href="{{ route('login') }}">{{ __('Login') }}</a>
