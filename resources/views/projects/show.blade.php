@@ -18,10 +18,9 @@
 					<h2 class="text-lg text-gray-500 font-medium mb-3">Tasks</h2>
 
 					{{-- tasks --}}
-					<div class="bg-white p-4 rounded-lg shadow mb-3">Lorem ipsum</div>
-					<div class="bg-white p-4 rounded-lg shadow mb-3">Lorem ipsum</div>
-					<div class="bg-white p-4 rounded-lg shadow mb-3">Lorem ipsum</div>
-					<div class="bg-white p-4 rounded-lg shadow">Lorem ipsum</div>
+					@foreach($project->tasks as $task)
+					<div class="bg-white p-4 rounded-lg shadow mb-3">{{ $task->body }}</div>
+					@endforeach
 
 				</div>
 
