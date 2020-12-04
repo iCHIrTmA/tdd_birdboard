@@ -62,7 +62,7 @@
 				</div>
 			</div>
 
-			<div class="lg:w-1/4 px-3">
+			<div class="lg:w-1/4 px-3 mt-6">
 				@include('projects.card')
 			</div>
 		</div>		
