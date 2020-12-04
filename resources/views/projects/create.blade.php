@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-	<form method="POST" action="{{ url('/projects')}}">
+	<form method="POST" action="{{ url('/projects') }}">
 		@csrf
 		
 		<h1 class="heading">Create a Project</h1>

@@ -20,7 +20,7 @@
 					{{-- tasks --}}
 					@foreach($project->tasks as $task)
 						<div class="bg-white p-4 rounded-lg shadow mb-3">
-							<form action="{{ url($project->path() . '/tasks/' . $task->id) }}" method="POST">
+							<form action="{{ url($task->path()) }}" method="POST">
 								@method('PATCH')
 								@csrf
 								<div class="flex">

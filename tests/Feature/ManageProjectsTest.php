@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Project;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -30,15 +31,19 @@ class ManageProjectsTest extends TestCase
         $this->get('/projects/create')->assertStatus(200);
 
         $attributes = [
-            'title' => $this->faker->sentence,
-            'description' => $this->faker->paragraph
+            'title'       => $this->faker->sentence,
+            'description' => $this->faker->paragraph,
         ];
 
-        $this->post('/projects', $attributes)->assertRedirect('/projects');
+        $response = $this->post('/projects', $attributes);
 
-        $this->assertDatabaseHas('projects', $attributes);
+        $project = Project::where($attributes)->first();
 
-        $this->get('/projects')->assertSee($attributes['title']);
+        $response->assertRedirect($project->path());
+
+        // $this->assertDatabaseHas('projects', $attributes);
+
+        // $this->get('/projects')->assertSee($attributes['title']);
     }
 
     public function test_a_user_can_view_their_project()
