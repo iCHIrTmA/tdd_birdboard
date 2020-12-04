@@ -3,5 +3,5 @@
 		<a href="{{ url($project->path()) }}">{{ $project->title }}</a>
 	</h3>
 
-	<div class="text-gray-700">{{ Illuminate\Support\Str::limit($project->description, 50) }}</div>
+	<div class="text-gray-500">{{ Illuminate\Support\Str::limit($project->description, 50) }}</div>
 </div>
