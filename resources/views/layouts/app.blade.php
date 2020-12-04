@@ -21,7 +21,7 @@
             <div class="container mx-auto px-6 md:px-0">
                 <div class="flex items-center justify-center ">
                     <h1 class="mr-6">
-                        <a href="{{ url('/') }}">
+                        <a href="{{ url('/projects') }}">
                             <img src="{{ asset('images/logo.svg')}}" alt="birdboard">
                         </a>
                     </h1>
