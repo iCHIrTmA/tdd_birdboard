@@ -19,7 +19,18 @@
 
 					{{-- tasks --}}
 					@foreach($project->tasks as $task)
-						<div class="bg-white p-4 rounded-lg shadow mb-3">{{ $task->body }}</div>
+						<div class="bg-white p-4 rounded-lg shadow mb-3">
+							<form action="{{ url($project->path() . '/tasks/' . $task->id) }}" method="POST">
+								@method('PATCH')
+								@csrf
+								<div class="flex">
+									<input name="body" value="{{ $task->body }}" class="w-full 
+									{{ $task->completed ? 'text-gray-500' : '' }}">
+									<input name="completed" type="checkbox" onChange="this.form.submit()" 
+									{{ $task->completed ? 'checked' : '' }}>
+								</div>
+							</form>
+						</div>
 					@endforeach
 
 					<div class="bg-white p-4 rounded-lg shadow mb-3">
