@@ -1,5 +1,11 @@
 <?php
 
+\App\Project::created(function ($project) {
+	\App\Activity::create([
+		'project_id' => $project->id
+	]);
+});
+
 use App\Http\Controllers\ProjectsController;
 use Illuminate\Support\Facades\Route;
 
