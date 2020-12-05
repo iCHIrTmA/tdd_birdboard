@@ -7,7 +7,7 @@
 				<a href="{{ url('/projects')}}">My Projects</a> / {{ $project->title }}
 			</p>
 
-			<a href="{{ url('/projects/create') }}" class="bg-blue-400 text-white no-underline rounded-lg shadow-lg text-sm py-3 px-4">New Project</a>
+			<a href="{{ url($project->path() . '/edit') }}" class="bg-blue-400 text-white no-underline rounded-lg shadow-lg text-sm py-3 px-4">Edit Project</a>
 		</div>
 	</header>
 
@@ -63,7 +63,7 @@
 			</div>
 
 			<div class="lg:w-1/4 px-3 mt-6">
-				@include('projects.card')
+				@include('projects._card')
 			</div>
 		</div>		
 	</main>
