@@ -1,19 +1,5 @@
 <?php
 
-\App\Project::created(function ($project) {
-	\App\Activity::create([
-		'project_id' => $project->id,
-		'description' => 'created',
-	]);
-});
-
-\App\Project::updated(function ($project) {
-	\App\Activity::create([
-		'project_id' => $project->id,
-		'description' => 'updated',
-	]);
-});
-
 use App\Http\Controllers\ProjectsController;
 use Illuminate\Support\Facades\Route;
 
