@@ -24,7 +24,7 @@
 								@method('PATCH')
 								@csrf
 								<div class="flex">
-									<input name="body" value="{{ $task->body }}" class="w-full 
+									<input name="body" value="{{ $task->body }}" class="font-medium w-full 
 									{{ $task->completed ? 'text-gray-500' : '' }}">
 									<input name="completed" type="checkbox" onChange="this.form.submit()" 
 									{{ $task->completed ? 'checked' : '' }}>
@@ -71,10 +71,8 @@
 
 			<div class="lg:w-1/4 px-3 mt-6">
 				@include('projects._card')
+				@include('projects.activity._card')
 			</div>
 		</div>		
 	</main>
-
-
-
 @endsection
