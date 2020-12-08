@@ -36,10 +36,10 @@ class Project extends Model
     {	
     	$this->activity()->create([
     		'description' => $description,
-    		'changes'     => [
-    			'before'  => array_diff($this->old, $this->toArray()),
-    			'after'   => array_diff($this->toArray(), $this->old),
-    		],
+    		'changes'     => $description === 'updated' ? [
+    			'before'  => array_diff($this->old, $this->getAttributes()),
+    			'after'   => $this->getChanges(),
+    		] : null,
     	]);
     }
 
