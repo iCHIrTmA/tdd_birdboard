@@ -5,6 +5,7 @@ namespace App;
 use App\Activity;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Arr;
 
 class Project extends Model
 {
@@ -36,11 +37,18 @@ class Project extends Model
     {	
     	$this->activity()->create([
     		'description' => $description,
-    		'changes'     => $description === 'updated' ? [
-    			'before'  => array_diff($this->old, $this->getAttributes()),
-    			'after'   => $this->getChanges(),
-    		] : null,
+    		'changes'     => $this->activityChanges($description),
     	]);
+    }
+
+    protected function activityChanges($description)
+    {
+    	if ($description == 'updated') {
+		   	return [
+	    		'before'  => Arr::except(array_diff($this->old, $this->getAttributes()), 'updated_at'),
+	    		'after'   => Arr::except($this->getChanges(), 'updated_at'),
+		    ];   
+    	} 
     }
 
 	public function activity()
