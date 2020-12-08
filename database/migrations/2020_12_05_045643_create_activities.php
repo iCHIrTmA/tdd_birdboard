@@ -17,6 +17,7 @@ class CreateActivities extends Migration
             $table->id();
             $table->foreignId('project_id')->constrained()->onDelete('cascade');
             $table->nullableMorphs('subject');
+            $table->text('changes')->nullable();
             $table->string('description');
             $table->timestamps();
         });
