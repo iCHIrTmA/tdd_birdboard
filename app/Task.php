@@ -11,13 +11,15 @@ class Task extends Model
 {
     use RecordsActivity;
 
-    public $old = [];
-
     protected $guarded = [];
+
     protected $touches = ['project'];
+
     protected $casts = [
         'completed' => 'boolean'
     ];
+
+    protected static $recordableEvents = ['created', 'deleted'];
 
     public function complete()
     {
@@ -41,20 +43,5 @@ class Task extends Model
     public function path()
     {
     	return "/projects/{$this->project->id}/tasks/{$this->id}";
-    }
-
-    protected function activityChanges()
-    {
-        if ($this->wasChanged()) {
-            return [
-                'before'  => Arr::except(array_diff($this->old, $this->getAttributes()), 'updated_at'),
-                'after'   => Arr::except($this->getChanges(), 'updated_at'),
-            ];   
-        } 
-    }
-
-    public function activity()
-    {
-        return $this->morphMany(Activity::class, 'subject')->latest();
     }
 }

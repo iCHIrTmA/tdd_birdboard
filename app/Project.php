@@ -13,8 +13,6 @@ class Project extends Model
 
 	protected $guarded = [];
 
-	public $old = [];
-
 	public function path()
 	{
 		return "/projects/{$this->id}";
@@ -34,16 +32,6 @@ class Project extends Model
 	{
 		return $this->tasks()->create(compact('body'));
 	}
-
-    protected function activityChanges()
-    {
-    	if ($this->wasChanged()) {
-		   	return [
-	    		'before'  => Arr::except(array_diff($this->old, $this->getAttributes()), 'updated_at'),
-	    		'after'   => Arr::except($this->getChanges(), 'updated_at'),
-		    ];   
-    	} 
-    }
 
 	public function activity()
 	{
