@@ -5,9 +5,14 @@ namespace App;
 use App\Activity;
 use App\Project;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Arr;
 
 class Task extends Model
 {
+    use RecordsActivity;
+
+    public $old = [];
+
     protected $guarded = [];
     protected $touches = ['project'];
     protected $casts = [
@@ -38,12 +43,14 @@ class Task extends Model
     	return "/projects/{$this->project->id}/tasks/{$this->id}";
     }
 
-    public function recordActivity($description)
+    protected function activityChanges()
     {
-        $this->activity()->create([
-            'project_id'  => $this->project_id,
-            'description' => $description
-        ]);
+        if ($this->wasChanged()) {
+            return [
+                'before'  => Arr::except(array_diff($this->old, $this->getAttributes()), 'updated_at'),
+                'after'   => Arr::except($this->getChanges(), 'updated_at'),
+            ];   
+        } 
     }
 
     public function activity()
