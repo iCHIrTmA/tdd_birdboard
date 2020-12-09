@@ -51,7 +51,7 @@
 
 						<textarea
 							name="notes" 
-							class="bg-white p-4 rounded-lg shadow w-full mb-4" 
+							class="bg-white p-4 rounded-lg shadow w-full mb-4 font-medium" 
 							style="min-height: 200px"
 							placeholder="Anything special you want to make note of?">
 							{{ $project->notes}}
