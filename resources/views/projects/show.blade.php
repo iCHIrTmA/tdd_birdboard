@@ -7,7 +7,19 @@
 				<a href="{{ url('/projects')}}">My Projects</a> / {{ $project->title }}
 			</p>
 
-			<a href="{{ url($project->path() . '/edit') }}" class="bg-blue-400 text-white no-underline rounded-lg shadow-lg text-sm py-3 px-4">Edit Project</a>
+			<div class="flex items-center">
+				@foreach($project->members as $member)
+					<img 
+						src="{{ asset('images/default-dog-avatar.png')}}" 
+						alt="{{ $member->name }}'s avatar"
+						class="rounded-full w-10 mr-1">
+				@endforeach
+						<img src="{{ asset('images/custom-cat-avatar.jpeg')}}" 
+						alt="{{ $project->owner->name }}'s avatar"
+						class="rounded-full w-10 mr-1">
+						
+			<a href="{{ url($project->path() . '/edit') }}" class="bg-blue-400 text-white no-underline rounded-lg shadow-lg text-sm py-3 px-4 ml-4">Edit Project</a>
+			</div>
 		</div>
 	</header>
 
