@@ -71,19 +71,17 @@
 
 						<button type="submit" class="bg-blue-400 text-white no-underline rounded-lg shadow-lg text-sm py-3 px-4">Save</button>
 					</form>
-					@if ($errors->any())
-						<div class="field mt-4">
-								@foreach ($errors->all() as $error)
-									<li class="text-sm text-red-700">{{ $error }}</li>
-								@endforeach
-						</div>
-					@endif
+					@include('projects._errors')
 				</div>
 			</div>
 
 			<div class="lg:w-1/4 px-3 mt-6">
 				@include('projects._card')
 				@include('projects.activity._card')
+
+				@can ('manage', $project)
+					@include('projects._invite')
+				@endcan
 			</div>
 		</div>		
 	</main>
