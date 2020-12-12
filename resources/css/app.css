@@ -1,8 +1,6 @@
 @import "tailwindcss/base";
 
 @import "tailwindcss/components";
-.button {
-	@apply bg-blue-500;
-}
+
 @import "tailwindcss/utilities";
 
