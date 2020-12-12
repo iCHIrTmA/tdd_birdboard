@@ -88,16 +88,14 @@
 				this.form.tasks.push({ value: '' });
 			},
 
-			submit() {
-				axios.defaults.baseURL = 'http://localhost/Laravel/birdboard/public/',
+			async submit() {
+				axios.defaults.baseURL = 'http://localhost/Laravel/birdboard/public/';
 
-				axios.post('/projects', this.form)
-					.then(response => {
-						location = response.data.message;
-					})
-					.catch(error => {
-						this.errors = error.response.data.errors;
-					});
+				try {
+					location = (await axios.post('/projects', this.form)).data.message;
+				} catch (error) {
+					this.errors = error.response.data.errors;
+				}
 			},
 		}
 	}
