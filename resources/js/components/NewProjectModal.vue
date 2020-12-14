@@ -43,7 +43,7 @@
 							v-model="task.value">
 					</div>
 
-					<button class="inline-flex items-center text-xs" @click="addTask">
+					<button type="button" class="inline-flex items-center text-xs" @click="addTask">
 						<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" class="mr-2">
 						   <g fill="none" fill-rule="evenodd" opacity=".307">
 						      <path stroke="#000" stroke-opacity=".012" stroke-width="0" d="M-3-3h24v24H-3z"></path>
@@ -57,7 +57,8 @@
 			</div>
 
 			<footer class="flex justify-end">
-				<button 
+				<button
+					type="button" 
 					class="bg-white text-blue-400 border border-blue-400 rounded-lg shadow-lg text-sm py-3 px-4 mr-4" 
 					@click="$modal.hide('new-project')">
 					Cancel
