@@ -11,10 +11,10 @@
 							type="text" 
 							id="title" 
 							class="border p-2 text-xs block w-full rounded"
-							:class="errors.title ? 'border-red-700' : 'border-muted-light'"
+							:class="form.errors.title ? 'border-red-700' : 'border-muted-light'"
 							v-model="form.title">
 
-						<span class="text-xs italic text-red-700" v-if="errors.title" v-text="errors.title[0]"></span>
+						<span class="text-xs italic text-red-700" v-if="form.errors.title" v-text="form.errors.title[0]"></span>
 					</div>			
 
 					<div class="mb-4">
@@ -22,12 +22,12 @@
 						<textarea 
 							id="description" 
 							class="border p-2 text-xs block w-full rounded"
-							:class="errors.title ? 'border-red-700' : 'border-muted-light'" 
+							:class="form.errors.description ? 'border-red-700' : 'border-muted-light'" 
 							rows="7"
 							v-model="form.description">					
 						</textarea>
 
-						<span class="text-xs italic text-red-700" v-if="errors.description" v-text="errors.description[0]"></span>
+						<span class="text-xs italic text-red-700" v-if="form.errors.description" v-text="form.errors.description[0]"></span>
 
 					</div>
 				</div>
@@ -70,33 +70,36 @@
 </template>
 
 <script>
+	import BirdboardForm from './BirdboardForm';
+
 	export default {
 		data() {
 			return {
-				form: {
+				form: new BirdboardForm({
 					title: '',
 					description: '',
 					tasks: [
 						{ body: ''},
 					]					
-				},
-				errors: {},
+				}),
 			};
 		},
 
 		methods: {
 			addTask() {
-				this.form.tasks.push({ value: '' });
+				this.form.tasks.push({ body: '' });
 			},
 
 			async submit() {
 				axios.defaults.baseURL = 'http://localhost/Laravel/birdboard/public/';
+				this.form.submit('/projects')
+					.then(response => location = response.data);
 
-				try {
-					location = (await axios.post('/projects', this.form)).data.message;
-				} catch (error) {
-					this.errors = error.response.data.errors;
-				}
+				// try {
+				// 	location = (await axios.post('/projects', this.form)).data.message;
+				// } catch (error) {
+				// 	this.errors = error.response.data.errors;
+				// }
 			},
 		}
 	}
