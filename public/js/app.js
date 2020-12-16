@@ -2063,7 +2063,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 axios.defaults.baseURL = 'http://localhost/Laravel/birdboard/public/';
 
                 _this.form.submit('/projects').then(function (response) {
-                  return location = response.data;
+                  return location = response.data.message;
+                })["catch"](function (error) {
+                  return alert('error');
                 }); // try {
                 // 	location = (await axios.post('/projects', this.form)).data.message;
                 // } catch (error) {
@@ -33082,6 +33084,7 @@ var BirdboardForm = /*#__PURE__*/function () {
     this.originalData = JSON.parse(JSON.stringify(data));
     Object.assign(this, data);
     this.errors = {};
+    this.submitted = false;
   }
 
   _createClass(BirdboardForm, [{
@@ -33096,9 +33099,44 @@ var BirdboardForm = /*#__PURE__*/function () {
       return data;
     }
   }, {
+    key: "post",
+    value: function post(endpoint) {
+      this.submit(endpoint);
+    }
+  }, {
+    key: "patch",
+    value: function patch(endpoint) {
+      this.submit(endpoint, 'patch');
+    }
+  }, {
+    key: "delete",
+    value: function _delete(endpoint) {
+      this.submit(endpoint, 'delete');
+    }
+  }, {
     key: "submit",
     value: function submit(endpoint) {
-      return axios.post(endpoint, this.data());
+      var requestType = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'post';
+      return axios[requestType](endpoint, this.data())["catch"](this.onFail.bind(this)).then(this.onSuccess.bind(this));
+    }
+  }, {
+    key: "onSuccess",
+    value: function onSuccess(response) {
+      this.submitted = true;
+      this.errors = {};
+      return response;
+    }
+  }, {
+    key: "onFail",
+    value: function onFail(error) {
+      this.errors = error.response.data.errors;
+      this.submitted = false;
+      throw error;
+    }
+  }, {
+    key: "reset",
+    value: function reset() {
+      Object.assign(this, this.originalData);
     }
   }]);
 

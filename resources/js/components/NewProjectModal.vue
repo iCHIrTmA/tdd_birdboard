@@ -93,7 +93,8 @@
 			async submit() {
 				axios.defaults.baseURL = 'http://localhost/Laravel/birdboard/public/';
 				this.form.submit('/projects')
-					.then(response => location = response.data);
+					.then(response => location = response.data.message)
+					.catch(error => alert('error'));
 
 				// try {
 				// 	location = (await axios.post('/projects', this.form)).data.message;
