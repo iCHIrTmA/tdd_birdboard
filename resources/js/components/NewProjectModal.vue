@@ -91,6 +91,10 @@
 			},
 
 			async submit() {
+				if (! this.form.tasks[0].body) {
+					delete this.form.originalData.tasks;
+				}
+				
 				axios.defaults.baseURL = 'http://localhost/Laravel/birdboard/public/';
 				this.form.submit('/projects')
 					.then(response => location = response.data.message)

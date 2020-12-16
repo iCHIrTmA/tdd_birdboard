@@ -9,13 +9,11 @@ class BirdboardForm {
 	}
 
 	data() {
-		let data = {};
-
-		for (let attribute in this.originalData) {
+		return Object.keys(this.originalData).reduce((data, attribute) => {
 			data[attribute] = this[attribute];
-		}
 
-		return data;
+			return data;
+		}, {});
 	}
 
 	post(endpoint) {

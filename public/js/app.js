@@ -2060,6 +2060,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                if (!_this.form.tasks[0].body) {
+                  delete _this.form.originalData.tasks;
+                }
+
                 axios.defaults.baseURL = 'http://localhost/Laravel/birdboard/public/';
 
                 _this.form.submit('/projects').then(function (response) {
@@ -2073,7 +2077,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 // }
 
 
-              case 2:
+              case 3:
               case "end":
                 return _context.stop();
             }
@@ -33090,13 +33094,12 @@ var BirdboardForm = /*#__PURE__*/function () {
   _createClass(BirdboardForm, [{
     key: "data",
     value: function data() {
-      var data = {};
+      var _this = this;
 
-      for (var attribute in this.originalData) {
-        data[attribute] = this[attribute];
-      }
-
-      return data;
+      return Object.keys(this.originalData).reduce(function (data, attribute) {
+        data[attribute] = _this[attribute];
+        return data;
+      }, {});
     }
   }, {
     key: "post",
