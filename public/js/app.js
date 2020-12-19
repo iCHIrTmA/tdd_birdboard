@@ -1938,6 +1938,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     width: {
@@ -1951,6 +1954,21 @@ __webpack_require__.r(__webpack_exports__);
     return {
       isOpen: false
     };
+  },
+  watch: {
+    isOpen: function isOpen(_isOpen) {
+      if (_isOpen) {
+        document.addEventListener('click', this.closeIfClickedOutside);
+      }
+    }
+  },
+  methods: {
+    closeIfClickedOutside: function closeIfClickedOutside(event) {
+      if (!event.target.closest('.dropdown')) {
+        this.isOpen = false;
+        document.removeEventListener('click', this.closeIfClickedOutside);
+      }
+    }
   }
 });
 
@@ -3393,8 +3411,11 @@ var render = function() {
     _c(
       "div",
       {
+        staticClass: "dropdown-toggle",
+        attrs: { "aria-haspopup": "true", "aria-expanded": "true" },
         on: {
           click: function($event) {
+            $event.preventDefault()
             _vm.isOpen = !_vm.isOpen
           }
         }
