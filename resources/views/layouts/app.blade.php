@@ -19,21 +19,33 @@
     <div id="app">
         <nav class="bg-white shadow mb-8 py-3">
             <div class="container mx-auto px-6 md:px-0">
-                <div class="flex items-center justify-center ">
+                <div class="flex items-center justify-between ">
                     <h1 class="mr-6">
                         <a href="{{ url('/projects') }}">
                             <img src="{{ asset('images/logo.svg')}}" alt="birdboard">
                         </a>
                     </h1>
-                    <div class="flex-1 text-right">
+                    <div class="flex">
                         @guest
                             <a class="no-underline hover:underline text-black-100 text-sm p-3" href="{{ route('login') }}">{{ __('Login') }}</a>
                             @if (Route::has('register'))
                                 <a class="no-underline hover:underline text-black-100 text-sm p-3" href="{{ route('register') }}">{{ __('Register') }}</a>
                             @endif
                         @else
-                            <span class="text-black-100 text-sm pr-4">{{ Auth::user()->name }}</span>
+                            <dropdown align="right">
+                                <template v-slot:trigger>                           
+                                    <button class="flex items-center text-black-100 text-sm pr-4">
+                                        <img src="{{ asset('images/custom-cat-avatar.jpeg')}}" 
+                                        alt="{{ Auth::user()->name }}'s avatar"
+                                        class="rounded-full w-10 mr-1">
+                                        {{ Auth::user()->name }}
+                                    </button>
+                                </template>
 
+                                <a href="#" class="block hover:underline leading-loose px-4 ">Item 1</a>
+                                <a href="#" class="block hover:underline leading-loose px-4">Item 2</a>
+                                <a href="#" class="block hover:underline leading-loose px-4">Item 3</a>
+                            </dropdown>  
                             <a href="{{ route('logout') }}"
                                class="no-underline hover:underline text-black-100 text-sm p-3"
                                onclick="event.preventDefault();

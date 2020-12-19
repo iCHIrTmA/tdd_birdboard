@@ -26,6 +26,7 @@ Vue.use(VModal);
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('new-project', require('./components/NewProjectModal.vue').default);
+Vue.component('dropdown', require('./components/Dropdown.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
